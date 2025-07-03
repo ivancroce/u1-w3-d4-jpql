@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @Entity // Tells to JPA that this class must be mapped to a specific table
 @Table(name = "events")
+@Inheritance(strategy = InheritanceType.JOINED) // 1 table for events and 1 for each subclass
 public class Event {
 
     // One event to many participations

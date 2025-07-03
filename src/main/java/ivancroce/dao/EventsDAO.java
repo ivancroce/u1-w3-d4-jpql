@@ -1,10 +1,14 @@
 package ivancroce.dao;
 
+import ivancroce.entities.Concert;
+import ivancroce.entities.ConcertGenre;
 import ivancroce.entities.Event;
 import ivancroce.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
+import java.util.List;
 import java.util.UUID;
 
 public class EventsDAO {
@@ -40,4 +44,23 @@ public class EventsDAO {
             throw new NotFoundException(eventId);
         return found;
     }
+
+    // 1. JPQL Methods
+    public List<Concert> getConcertsInStreaming(boolean streaming) {
+        // JPQL uses entities, not on the tables
+        // SELECT all obj c of Concert type
+        TypedQuery<Concert> query = em.createQuery("SELECT c FROM Concert c WHERE c.inStreaming = :isStreaming", Concert.class);
+        // set the value to the parameter :isStreaming
+        query.setParameter("isStreaming", streaming);
+        // execute the query and return a list
+        return query.getResultList();
+    }
+
+    public List<Concert> getConcertsByGenre(ConcertGenre genre) {
+        TypedQuery<Concert> query = em.createQuery("SELECT c FROM Concert c WHERE c.genre = :genre", Concert.class);
+        query.setParameter("genre", genre);
+        return query.getResultList();
+    }
+
+
 }
