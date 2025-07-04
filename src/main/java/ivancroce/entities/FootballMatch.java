@@ -2,6 +2,7 @@ package ivancroce.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
@@ -9,7 +10,14 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "football_matches")
 
-// 2. NamedQueries
+// 2. NamedQueries, we can call them in DAO
+@NamedQuery(
+        name = "get_matches_won_by_home_team",
+        query = "SELECT fm FROM FootballMatch fm WHERE fm.homeTeamGoals > fm.awayTeamGoals")
+@NamedQuery(
+        name = "get_matches_won_by_away_team",
+        query = "SELECT fm FROM FootballMatch fm WHERE fm.homeTeamGoals < fm.awayTeamGoals")
+
 
 public class FootballMatch extends Event {
     @Column(name = "home_team")
@@ -26,14 +34,12 @@ public class FootballMatch extends Event {
     public FootballMatch() {
     }
 
-    public FootballMatch(String title, LocalDate eventDate, String description, EventType eventType, int maxNumParticipants, Location location, String homeTeam, String awayTeam, String winningTeam, int homeTeamGoals, int awayTeamGoals) {
+    public FootballMatch(String title, LocalDate eventDate, String description, EventType eventType, int maxNumParticipants, Location location, String homeTeam, String awayTeam) {
         super(title, eventDate, description, eventType, maxNumParticipants, location);
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
-        this.winningTeam = winningTeam;
-        this.homeTeamGoals = homeTeamGoals;
-        this.awayTeamGoals = awayTeamGoals;
     }
+
 
     public String getHomeTeam() {
         return homeTeam;

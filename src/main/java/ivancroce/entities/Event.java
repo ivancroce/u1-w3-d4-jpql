@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity // Tells to JPA that this class must be mapped to a specific table
-@Table(name = "events")
 @Inheritance(strategy = InheritanceType.JOINED) // 1 table for events and 1 for each subclass
-public class Event {
+@Table(name = "events")
+public abstract class Event {
 
     // One event to many participations
     @OneToMany(mappedBy = "event")
@@ -114,12 +114,14 @@ public class Event {
     @Override
     public String toString() {
         return "Event{" +
-                "eventId=" + eventId +
+                "participations=" + participations +
+                ", eventId=" + eventId +
                 ", title='" + title + '\'' +
                 ", eventDate=" + eventDate +
                 ", description='" + description + '\'' +
                 ", eventType=" + eventType +
                 ", maxNumParticipants=" + maxNumParticipants +
+                ", location=" + location +
                 '}';
     }
 }

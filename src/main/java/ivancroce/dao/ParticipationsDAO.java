@@ -39,5 +39,19 @@ public class ParticipationsDAO {
             throw new NotFoundException(participationId);
         return found;
     }
+
+    public void findByIdAndDelete(String participationId) {
+        try {
+            EntityTransaction t = em.getTransaction();
+            t.begin();
+            Participation found = this.findById(participationId);
+            em.remove(found);
+            t.commit();
+            System.out.println("Participation deleted.");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
 

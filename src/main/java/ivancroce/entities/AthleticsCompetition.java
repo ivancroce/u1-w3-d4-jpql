@@ -19,10 +19,11 @@ public class AthleticsCompetition extends Event {
     @JoinColumn(name = "winner_id")
     private Person winner;
 
-    public AthleticsCompetition(String title, LocalDate eventDate, String description, EventType eventType, int maxNumParticipants, Location location, Set<Person> athletes, Person winner) {
+    public AthleticsCompetition() {
+    }
+
+    public AthleticsCompetition(String title, LocalDate eventDate, String description, EventType eventType, int maxNumParticipants, Location location) {
         super(title, eventDate, description, eventType, maxNumParticipants, location);
-        this.athletes = athletes;
-        this.winner = winner;
     }
 
     public Set<Person> getAthletes() {

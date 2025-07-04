@@ -15,6 +15,9 @@ public class Concert extends Event {
     @Column(name = "in_streaming")
     private boolean inStreaming;
 
+    public Concert() {
+    }
+
     public Concert(String title, LocalDate eventDate, String description, EventType eventType, int maxNumParticipants, Location location, ConcertGenre genre, boolean inStreaming) {
         super(title, eventDate, description, eventType, maxNumParticipants, location);
         this.genre = genre;

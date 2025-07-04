@@ -12,6 +12,9 @@
         <class>ivancroce.entities.Location</class>
         <class>ivancroce.entities.Person</class>
         <class>ivancroce.entities.Participation</class>
+        <class>ivancroce.entities.FootballMatch</class>
+        <class>ivancroce.entities.Concert</class>
+        <class>ivancroce.entities.AthleticsCompetition</class>
         <!--    need to add class    <class>ivancroce.entities.Event</class>-->
         <properties>
             <property name="jakarta.persistence.jdbc.url"

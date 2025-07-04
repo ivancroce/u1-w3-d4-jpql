@@ -3,6 +3,7 @@ package ivancroce.dao;
 import ivancroce.entities.Concert;
 import ivancroce.entities.ConcertGenre;
 import ivancroce.entities.Event;
+import ivancroce.entities.FootballMatch;
 import ivancroce.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -43,6 +44,17 @@ public class EventsDAO {
         if (found == null)
             throw new NotFoundException(eventId);
         return found;
+    }
+
+    // --- use of NamedQueries ---
+    public List<FootballMatch> getMatchesWonByHomeTeam() {
+        TypedQuery<FootballMatch> query = em.createNamedQuery("get_matches_won_by_home_team", FootballMatch.class);
+        return query.getResultList();
+    }
+
+    public List<FootballMatch> getMatchesWonByAwayTeam() {
+        TypedQuery<FootballMatch> query = em.createNamedQuery("get_matches_won_by_away_team", FootballMatch.class);
+        return query.getResultList();
     }
 
     // 1. JPQL Methods
